@@ -1,0 +1,45 @@
+<div class="container">
+  <br>
+  <div *ngIf="isLoggedIn">
+    <div class="form-group">
+      <button class="col-3 btn btn-primary btn-block" (click)="createProduct()">
+        Create product
+      </button>
+    </div>
+    <table>
+      <thead>
+      <tr>
+        <th>{{ 'Name' }}</th>
+        <th>{{ 'Description' }}</th>
+        <th>{{ 'Price' }}</th>
+        <th>{{ 'Category Path' }}</th>
+        <th>{{ 'Available' }}</th>
+        <th>{{ 'Actions' }}</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let p of products">
+        <td>{{ p?.name }}</td>
+        <td>{{ p?.description }}</td>
+        <td>{{ p?.price }}</td>
+        <td>{{ getCategoryPath(p?.categories) }}</td>
+        <td>{{ p?.available }}</td>
+        <td>
+          <a  title="edit" (click)="editProduct(p)">
+            edit
+          </a>
+          <a title="edit" (click)="deleteProduct(p)">
+            del
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div *ngIf="!isLoggedIn">
+    You must be logged
+  </div>
+</div>
