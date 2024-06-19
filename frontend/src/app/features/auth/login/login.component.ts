@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../shared/services/auth.service';
-import { TokenStorageService } from '../../../shared/services/token-storage.service';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../../shared/services/auth.service';
+import {TokenStorageService} from '../../../shared/services/token-storage.service';
 import {Router} from "@angular/router";
 
 @Component({
@@ -52,8 +52,5 @@ export class LoginComponent implements OnInit {
 
   redirectToHome(): void {
     this.router.navigate(['/home']);
-  }
-  reloadPage(): void {
-    window.location.reload();
   }
 }

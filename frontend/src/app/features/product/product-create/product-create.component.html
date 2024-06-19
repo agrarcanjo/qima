@@ -68,7 +68,7 @@
         >
           <option
             *ngFor="let item of categories"
-            [ngValue]="item"
+            [ngValue]="item.id"
           >
             {{ item.name }}
           </option>
@@ -85,6 +85,7 @@
       <div class="form-group">
         <label for="available">Avaliable</label>
         <input
+          style="height: 20px;"
           type="checkbox"
           name="available"
           [(ngModel)]="form.available"

@@ -15,7 +15,7 @@ public class ProductDTO {
     private String description;
     private String categoryPath;
     private BigDecimal price;
-    private CategoryDTO category;
+    private Long category;
     private Boolean available;
 
     public Product toEntity() {

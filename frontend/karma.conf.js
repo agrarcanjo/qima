@@ -19,7 +19,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/Angular11JwtAuth'),
+      dir: require('path').join(__dirname, './coverage/qima-products'),
       subdir: '.',
       reporters: [
         { type: 'html' },

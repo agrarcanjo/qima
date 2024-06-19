@@ -1,5 +1,4 @@
-<div class="container">
-  <br>
+<div class="card-container">
   <div *ngIf="isLoggedIn">
     <div class="form-group">
       <button class="col-3 btn btn-primary btn-block" (click)="createProduct()">
@@ -22,15 +21,15 @@
       <tr *ngFor="let p of products">
         <td>{{ p?.name }}</td>
         <td>{{ p?.description }}</td>
-        <td>{{ p?.price }}</td>
+        <td>{{ p?.price | currency }}</td>
         <td>{{ getCategoryPath(p?.categories) }}</td>
         <td>{{ p?.available }}</td>
         <td>
-          <a  title="edit" (click)="editProduct(p)">
-            edit
+          <a title="edit" (click)="editProduct(p)">
+            <i class="fa fa-edit icon-default"></i>
           </a>
-          <a title="edit" (click)="deleteProduct(p)">
-            del
+          <a title="delete" (click)="deleteProduct(p)">
+            <i class="fa fa-trash icon-default"></i>
           </a>
         </td>
       </tr>

@@ -23,8 +23,6 @@ export class ProductCreateComponent implements OnInit {
 
   categories: any[] = [];
   isLoggedIn = false;
-  isLoginFailed = false;
-  errorMessage = '';
   roles: string[] = [];
 
   constructor(
@@ -38,29 +36,31 @@ export class ProductCreateComponent implements OnInit {
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
-      this.getProductEdit();
       this.getCategories();
+      this.getProductEdit();
       this.roles = this.tokenStorage.getUser().roles;
     }
   }
 
-  private getProductEdit() {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
-    if (id) {
-      this.productService.getProduct(id).subscribe(
+  private getProductEdit(): void {
+    const idProduct = this.activatedRoute.snapshot.paramMap.get('id');
+    if (idProduct) {
+      this.productService.getProduct(idProduct).subscribe(
         data => {
-          this.form = data;
+          const {id, name} = data.categories[0];
+          this.form = {...data, category:  id};
+          console.log(this.form);
         }
-      )
+      );
     }
   }
 
-  private getCategories() {
+  private getCategories(): void {
     this.productService.getAllCategories().subscribe(
       data => {
         this.categories = data;
       }
-    )
+    );
   }
 
   onSubmit(): void {
@@ -77,10 +77,11 @@ export class ProductCreateComponent implements OnInit {
     //     }
     //   )
     // }
+    console.log(this.form);
     this.productService.createProduct(this.form).subscribe(
       data => {
         this.router.navigate(['home']);
       }
-    )
+    );
   }
 }

@@ -55,7 +55,7 @@ public class ProductService {
         Product newProduct = product.toEntity();
 
          if (!ObjectUtils.isEmpty(product.getCategory())) {
-            Optional<Category> byId = categoryRepository.findById(product.getCategory().getId());
+            Optional<Category> byId = categoryRepository.findById(product.getCategory());
             newProduct.setCategories(Collections.singletonList(byId.get()));
         }
 

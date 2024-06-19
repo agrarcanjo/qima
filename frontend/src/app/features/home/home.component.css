@@ -3,6 +3,19 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: #c7c6c6;
+  margin: 30px auto;
+}
+
+.card-container {
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  background-color: #f8f9fa;
+  width: 90%;
+  min-height: 400px;
+
 }
 
 table {
