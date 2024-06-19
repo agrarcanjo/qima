@@ -23,11 +23,3 @@ INSERT INTO `productdb`.`category` (`name`, `parent_id`) VALUES ('Console', '1')
 INSERT INTO `productdb`.`category` (`name`, `parent_id`) VALUES ('PS4', '4');
 
 ```
-
-![home](src/assets/1.png)
-
-![signup](src/assets/2.png)
-
-![signin](src/assets/3.png)
-
-![home](src/assets/4.png)
