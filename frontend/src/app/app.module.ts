@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -11,7 +11,7 @@ import {HomeComponent} from './features/home/home.component';
 import {ProfileComponent} from './features/auth/profile/profile.component';
 
 import {authInterceptorProviders} from './shared/interceptor/auth.interceptor';
-import {ProductCreateComponent} from "./features/product/product-create/product-create.component";
+import {ProductCreateComponent} from './features/product/product-create/product-create.component';
 
 @NgModule({
   declarations: [
@@ -22,12 +22,13 @@ import {ProductCreateComponent} from "./features/product/product-create/product-
     ProfileComponent,
     ProductCreateComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule
+    ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })

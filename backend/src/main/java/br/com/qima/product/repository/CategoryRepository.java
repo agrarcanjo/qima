@@ -10,14 +10,6 @@ import java.util.List;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
-    String GET_RECURSIVELY_ALL_SUBCATEGORIES_SQL = "" +
-            " WITH RECURSIVE ALL_SUBCATEGORIES(ID, PARENT_ID) " +
-            " AS ( " +
-            " select c.id, c.parent_id from productdb.category c  " +
-            " where c.parent_id is null union all  " +
-            " select c.id, c.parent_id from ALL_SUBCATEGORIES  " +
-            " inner join productdb.category c on ALL_SUBCATEGORIES.id = c.parent_id)  " +
-            " select id, parent_id from ALL_SUBCATEGORIES";
 
     @Query(
             value = "WITH RECURSIVE ancestors(id, parent_id, name, lvl) AS ("

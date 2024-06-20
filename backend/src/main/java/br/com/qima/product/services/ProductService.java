@@ -1,12 +1,15 @@
 package br.com.qima.product.services;
 
 import br.com.qima.product.dtos.ProductDTO;
+import br.com.qima.product.dtos.ProjectQuery;
 import br.com.qima.product.exceptions.AppException;
 import br.com.qima.product.models.Category;
 import br.com.qima.product.models.Product;
 import br.com.qima.product.repository.CategoryRepository;
 import br.com.qima.product.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,8 +32,12 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public List<Product> getAllProducts() {
-        List<Product> all = productRepository.findAll();
-        return all;
+        return productRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Product> getAllProductsPageable(ProjectQuery query, Pageable pageable) {
+        return productRepository.findAll(query.toSpecification(), pageable);
     }
 
     @Transactional(readOnly = true)

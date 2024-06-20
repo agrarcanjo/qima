@@ -2,16 +2,20 @@ package br.com.qima.product.controllers;
 
 
 import br.com.qima.product.dtos.ProductDTO;
+import br.com.qima.product.dtos.ProjectQuery;
 import br.com.qima.product.models.Product;
 import br.com.qima.product.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
-
-;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
@@ -25,6 +29,12 @@ public class ProductController {
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<List<Product>> getAll() {
         return ResponseEntity.ok().body(productService.getAllProducts());
+    }
+
+    @GetMapping()
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public ResponseEntity<Page<Product>> getAllPageable(ProjectQuery query, Pageable pageable) {
+        return ResponseEntity.ok().body(productService.getAllProductsPageable(query, pageable));
     }
 
     @PostMapping("add")
@@ -52,6 +62,21 @@ public class ProductController {
             (@RequestBody ProductDTO product, @PathVariable Long productId) {
         productService.updateProduct(product, productId);
         return ResponseEntity.ok().build();
+    }
+
+
+    private List<Sort.Order> createSortOrder(List<String> sortList, String sortDirection) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        Sort.Direction direction;
+        for (String sort : sortList) {
+            if (sortDirection != null) {
+                direction = Sort.Direction.fromString(sortDirection);
+            } else {
+                direction = Sort.Direction.DESC;
+            }
+            sorts.add(new Sort.Order(direction, sort));
+        }
+        return sorts;
     }
 
 }

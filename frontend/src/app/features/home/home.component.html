@@ -1,14 +1,51 @@
 <div class="card-container">
   <div *ngIf="isLoggedIn">
-    <div class="form-group">
-      <button class="col-3 btn btn-primary btn-block" (click)="createProduct()">
-        Create product
-      </button>
-    </div>
+
+    <form
+      name="form"
+      #f="ngForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          name="name"
+          [(ngModel)]="form.name"
+          #name="ngModel"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input
+          type="text"
+          class="form-control"
+          name="description"
+          [(ngModel)]="form.description"
+          #description="ngModel"
+        />
+      </div>
+      <div class="form-group">
+        <label for="available">Avaliable</label>
+        <input
+          style="height: 20px ; display: flex"
+          type="checkbox"
+          name="available"
+          [(ngModel)]="form.available"
+          #available="ngModel"
+        />
+      </div>
+      <br>
+      <div class="form-group">
+        <button class="col-3 btn btn-primary btn-block" (click)="onSubmit()">
+          Find
+        </button>
+      </div>
+
+    </form>
     <table>
       <thead>
       <tr>
-        <th>{{ 'Name' }}</th>
+        <th (click)="onSubmit()" style="color: #007bff">{{ 'Name' }}</th>
         <th>{{ 'Description' }}</th>
         <th>{{ 'Price' }}</th>
         <th>{{ 'Category Path' }}</th>
@@ -18,7 +55,7 @@
       </thead>
 
       <tbody>
-      <tr *ngFor="let p of products">
+      <tr *ngFor="let p of products?.content">
         <td>{{ p?.name }}</td>
         <td>{{ p?.description }}</td>
         <td>{{ p?.price | currency }}</td>
@@ -35,7 +72,16 @@
       </tr>
       </tbody>
     </table>
+
+    <div class="form-group" style="padding-top: 40px">
+      <button class="col-3 btn btn-primary btn-block" (click)="createProduct()">
+        Create product
+      </button>
+    </div>
+
   </div>
+
+
 
 
   <div *ngIf="!isLoggedIn">
